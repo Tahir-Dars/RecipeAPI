@@ -2,7 +2,6 @@ package com.letsreadhere.recipeapi.helper;
 
 import com.letsreadhere.recipeapi.model.Recipe;
 import com.letsreadhere.recipeapi.repository.RecipeRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.h2.server.web.JakartaWebServlet;
 import org.springframework.boot.CommandLineRunner;
@@ -26,7 +25,7 @@ public class DataLoader {
 
     @Bean
     public CommandLineRunner initData() {
-        return args ->  {
+        return args -> {
             Recipe recipe001 = Recipe.builder()
                     .category("Fast Food")
                     .name("Home made burger")
