@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -25,7 +27,6 @@ public class Recipe {
     @Column(nullable = false, name = "Name")
     private String name;
 
-    @Size(min = 0, max = 5, message = "The rating must not outlimit between {min} and {max}")
     private Integer rating;
 
 }
