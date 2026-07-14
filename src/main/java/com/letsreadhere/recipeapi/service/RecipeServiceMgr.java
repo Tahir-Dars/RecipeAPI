@@ -17,7 +17,7 @@ public class RecipeServiceMgr implements RecipeService {
 
     @Override
     public RecipeDTO addRecipe(RecipeDTO recipeDTO) {
-        if (recipeDTO.getName().isEmpty()) {
+        if (recipeDTO.getName() == null || recipeDTO.getName().isBlank()) {
             throw new APIException("Name has been send blank !!");
         }
         if (recipeDTO.getRating() < 0 || recipeDTO.getRating() > 5) {

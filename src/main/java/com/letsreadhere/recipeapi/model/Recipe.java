@@ -1,6 +1,8 @@
 package com.letsreadhere.recipeapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,8 @@ public class Recipe {
     @Column(nullable = false, name = "Name")
     private String name;
 
+    @Min(0)
+    @Max(5)
     private Integer rating;
 
 }
