@@ -1,7 +1,9 @@
 package com.letsreadhere.recipeapi.helper;
 
 import com.letsreadhere.recipeapi.model.Recipe;
+import com.letsreadhere.recipeapi.repository.RecipeRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.h2.server.web.JakartaWebServlet;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -9,8 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DataLoader {
+
+    private final RecipeRepository recipeRepository;
+
     @Bean
     public ServletRegistrationBean<JakartaWebServlet> h2servletRegistration() {
         ServletRegistrationBean<JakartaWebServlet> registrationBean =
@@ -37,6 +42,9 @@ public class DataLoader {
                     .name("Macaroni")
                     .rating(4)
                     .build();
+            recipeRepository.save(recipe001);
+            recipeRepository.save(recipe002);
+            recipeRepository.save(recipe003);
         };
     }
 
