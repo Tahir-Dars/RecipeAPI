@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1")
+@RequestMapping(path = "/api/v1")
 @RequiredArgsConstructor
 public class RecipeController {
 
@@ -26,6 +26,14 @@ public class RecipeController {
     public ResponseEntity<List<RecipeDTO>> getAllRecipes(){
             List<RecipeDTO> recipeDTOS=recipeService.findAllRecipes();
             return ResponseEntity.ok(recipeDTOS);
+    }
+
+    @GetMapping(path = "/recipesaccordintocategory")
+    public ResponseEntity<List<RecipeDTO>> getCategorySpecificRecipes(
+            @RequestParam String category
+    ) {
+        List<RecipeDTO> recipeDTOS = recipeService.getCategorySpecificRecipes(category);
+        return ResponseEntity.ok(recipeDTOS);
     }
 
 }
