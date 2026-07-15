@@ -25,6 +25,7 @@ public class RecipeController {
     @GetMapping(path = "/recipes")
     public ResponseEntity<List<RecipeDTO>> getAllRecipes(){
             List<RecipeDTO> recipeDTOS=recipeService.findAllRecipes();
+            return ResponseEntity.ok(recipeDTOS);
     }
 
 }
