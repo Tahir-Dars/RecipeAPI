@@ -13,4 +13,9 @@ public class ExceptionControllerGlobally {
         API_ResponseDTO responses = new API_ResponseDTO(e.getMessage(), false);
         return new ResponseEntity<>(responses, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<API_ResponseDTO> resourceNotFoundEXCEPTION(ResourceNotFoundException e) {
+        API_ResponseDTO responses = new API_ResponseDTO(e.getMessage(), false);
+        return new ResponseEntity<>(responses, HttpStatus.NOT_FOUND);
+    }
 }
