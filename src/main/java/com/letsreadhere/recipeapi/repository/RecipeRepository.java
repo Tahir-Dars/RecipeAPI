@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
-    @Query("SELECT e FROM Recipe e WHERE LOWER(e.category) = ?1")
-    List<Recipe> findAllByCategory(String category);
+    @Query("SELECT e FROM Recipe e WHERE LOWER(e.category) LIKE %?1%")
+    List<Recipe> findAllByCategoryContaining(String category);
 }
