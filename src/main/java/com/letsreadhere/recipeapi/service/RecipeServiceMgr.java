@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.lang.module.ResolutionException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,15 +46,21 @@ public class RecipeServiceMgr implements RecipeService {
 
     @Override
     public RecipeDTO getRecipeById(Long recipeId) {
-       Recipe recipe=recipeRepository.findById(recipeId)
-               .orElseThrow(()->new ResourceNotFoundException("Recipe","RecipeID",recipeId));
-       return modelMapper.map(recipe,RecipeDTO.class);
+        Recipe recipe = recipeRepository.findById(recipeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Recipe", "RecipeID", recipeId));
+        return modelMapper.map(recipe, RecipeDTO.class);
 
     }
 
     @Override
     public List<RecipeDTO> getRatingSpecificRecipes(Integer rating) {
         List<Recipe> recipes = recipeRepository.findAllByRating(rating);
+        return entityToDto(recipes);
+    }
+
+    @Override
+    public List<RecipeDTO> getRating_CategorySpecificRecipes(String category, Integer rating) {
+        List<Recipe> recipes = recipeRepository.findByCategoryAndRating(category.toLowerCase(), rating);
         return entityToDto(recipes);
     }
 
