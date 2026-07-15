@@ -8,4 +8,6 @@ public interface RecipeService {
     RecipeDTO addRecipe(RecipeDTO recipeDTO);
 
     List<RecipeDTO> findAllRecipes();
+
+    List<RecipeDTO> getCategorySpecificRecipes(String category);
 }

@@ -33,13 +33,22 @@ public class RecipeServiceMgr implements RecipeService {
 
     @Override
     public List<RecipeDTO> findAllRecipes() {
-       List<Recipe> recipe=recipeRepository.findAll();
-        List<RecipeDTO> recipeDTOs= new ArrayList<>(recipe.size());
-        for (Recipe eachRecipe:recipe){
+        List<Recipe> recipe = recipeRepository.findAll();
+        return entityToDto(recipe);
+    }
+
+    @Override
+    public List<RecipeDTO> getCategorySpecificRecipes(String category) {
+        List<Recipe> recipes = recipeRepository.findAllByCategoryContaining(category.toLowerCase());
+        return entityToDto(recipes);
+    }
+
+    public List<RecipeDTO> entityToDto(List<Recipe> recipe) {
+        List<RecipeDTO> recipeDTOs = new ArrayList<>(recipe.size());
+        for (Recipe eachRecipe : recipe) {
             //map the upcoming instance with upcoming instance of recipeDTOs and add into list
-            recipeDTOs.add(modelMapper.map(eachRecipe,RecipeDTO.class));
+            recipeDTOs.add(modelMapper.map(eachRecipe, RecipeDTO.class));
         }
         return recipeDTOs;
-
     }
 }
