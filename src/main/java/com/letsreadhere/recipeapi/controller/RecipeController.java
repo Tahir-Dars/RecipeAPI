@@ -5,22 +5,26 @@ import com.letsreadhere.recipeapi.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping(path = "api/v1")
 @RequiredArgsConstructor
 public class RecipeController {
 
     private final RecipeService recipeService;
 
-    @PostMapping("/newrecipe")
+    @PostMapping(path = "/newrecipe")
     public ResponseEntity<RecipeDTO> addARecipe(@RequestBody RecipeDTO recipeDTO) {
         RecipeDTO recipeDTO1 = recipeService.addRecipe(recipeDTO);
         return new ResponseEntity<>(recipeDTO1, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/recipes")
+    public ResponseEntity<List<RecipeDTO>> getAllRecipes(){
+            List<RecipeDTO> recipeDTOS=recipeService.findAllRecipes();
     }
 
 }
