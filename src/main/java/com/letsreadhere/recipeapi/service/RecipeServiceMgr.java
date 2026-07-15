@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RecipeServiceMgr implements RecipeService {
@@ -26,5 +29,17 @@ public class RecipeServiceMgr implements RecipeService {
         Recipe recipe = modelMapper.map(recipeDTO, Recipe.class);
         recipe = recipeRepository.save(recipe);
         return modelMapper.map(recipe, RecipeDTO.class);
+    }
+
+    @Override
+    public List<RecipeDTO> findAllRecipes() {
+       List<Recipe> recipe=recipeRepository.findAll();
+        List<RecipeDTO> recipeDTOs= new ArrayList<>(recipe.size());
+        for (Recipe eachRecipe:recipe){
+            //map the upcoming instance with upcoming instance of recipeDTOs and add into list
+            recipeDTOs.add(modelMapper.map(eachRecipe,RecipeDTO.class));
+        }
+        return recipeDTOs;
+
     }
 }
