@@ -11,4 +11,6 @@ import java.util.List;
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     @Query("SELECT e FROM Recipe e WHERE LOWER(e.category) LIKE %?1%")
     List<Recipe> findAllByCategoryContaining(String category);
+
+    List<Recipe> findAllByRating(Integer rating);
 }
