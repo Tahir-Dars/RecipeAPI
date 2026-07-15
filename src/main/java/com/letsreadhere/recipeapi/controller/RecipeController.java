@@ -36,4 +36,13 @@ public class RecipeController {
         return ResponseEntity.ok(recipeDTOS);
     }
 
+    @GetMapping(path = "/recipe/{recipeId}")
+    public ResponseEntity<RecipeDTO> getRecipeById(
+            @PathVariable("recipeId") Long recipeId
+    ) {
+        RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
+        return ResponseEntity.ok(recipeDTO);
+    }
+
+
 }
