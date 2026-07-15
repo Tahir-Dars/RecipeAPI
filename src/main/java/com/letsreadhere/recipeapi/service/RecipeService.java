@@ -12,4 +12,6 @@ public interface RecipeService {
     List<RecipeDTO> getCategorySpecificRecipes(String category);
 
     RecipeDTO getRecipeById(Long recipeId);
+
+    List<RecipeDTO> getRatingSpecificRecipes(Integer rating);
 }

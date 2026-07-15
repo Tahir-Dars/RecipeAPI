@@ -53,6 +53,12 @@ public class RecipeServiceMgr implements RecipeService {
 
     }
 
+    @Override
+    public List<RecipeDTO> getRatingSpecificRecipes(Integer rating) {
+        List<Recipe> recipes = recipeRepository.findAllByRating(rating);
+        return entityToDto(recipes);
+    }
+
     public List<RecipeDTO> entityToDto(List<Recipe> recipe) {
         List<RecipeDTO> recipeDTOs = new ArrayList<>(recipe.size());
         for (Recipe eachRecipe : recipe) {
