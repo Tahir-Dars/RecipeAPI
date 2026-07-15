@@ -13,4 +13,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
     List<Recipe> findAllByCategoryContaining(String category);
 
     List<Recipe> findAllByRating(Integer rating);
+
+    @Query("SELECT e FROM Recipe e WHERE LOWER(e.category) = LOWER(:category)AND e.rating = :rating")
+    List<Recipe> findByCategoryAndRating(String category, Integer rating);
 }
