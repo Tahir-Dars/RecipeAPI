@@ -1,6 +1,7 @@
 package com.letsreadhere.recipeapi.service;
 
 import com.letsreadhere.recipeapi.exceptions.APIException;
+import com.letsreadhere.recipeapi.exceptions.ResourceNotFoundException;
 import com.letsreadhere.recipeapi.model.DTOs.RecipeDTO;
 import com.letsreadhere.recipeapi.model.Recipe;
 import com.letsreadhere.recipeapi.repository.RecipeRepository;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,14 @@ public class RecipeServiceMgr implements RecipeService {
     public List<RecipeDTO> getCategorySpecificRecipes(String category) {
         List<Recipe> recipes = recipeRepository.findAllByCategoryContaining(category.toLowerCase());
         return entityToDto(recipes);
+    }
+
+    @Override
+    public RecipeDTO getRecipeById(Long recipeId) {
+       Recipe recipe=recipeRepository.findById(recipeId)
+               .orElseThrow(()->new ResourceNotFoundException("Recipe","RecipeID",recipeId));
+       return modelMapper.map(recipe,RecipeDTO.class);
+
     }
 
     public List<RecipeDTO> entityToDto(List<Recipe> recipe) {

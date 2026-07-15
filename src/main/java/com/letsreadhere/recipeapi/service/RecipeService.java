@@ -10,4 +10,6 @@ public interface RecipeService {
     List<RecipeDTO> findAllRecipes();
 
     List<RecipeDTO> getCategorySpecificRecipes(String category);
+
+    RecipeDTO getRecipeById(Long recipeId);
 }
