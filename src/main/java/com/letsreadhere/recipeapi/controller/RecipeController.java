@@ -43,6 +43,31 @@ public class RecipeController {
         RecipeDTO recipeDTO = recipeService.getRecipeById(recipeId);
         return ResponseEntity.ok(recipeDTO);
     }
+    @GetMapping(path = "/recipesaccordintorating")
+    public ResponseEntity<List<RecipeDTO>> getRatingSpecificRecipes(
+                @RequestParam Integer rating
+    ) {
+        List<RecipeDTO> recipeDTOS = recipeService.getRatingSpecificRecipes(rating);
+        return ResponseEntity.ok(recipeDTOS);
+    }
+    @GetMapping(path = "/getRating&CategorySpecificRecipes")
+    public ResponseEntity<List<RecipeDTO>> getRating_CategorySpecificRecipes(
+            @RequestParam Integer rating,
+            @RequestParam String category
+    ) {
+        if (rating==null){
+            List<RecipeDTO> recipeDTOS = recipeService.getCategorySpecificRecipes(category);
+            return ResponseEntity.ok(recipeDTOS);
+        }
+
+        if (category == null || category.isBlank()){
+            List<RecipeDTO> recipeDTOS = recipeService.getRatingSpecificRecipes(rating);
+            return ResponseEntity.ok(recipeDTOS);
+        }
+        List<RecipeDTO> recipeDTOS = recipeService.getRating_CategorySpecificRecipes(category,rating);
+        return ResponseEntity.ok(recipeDTOS);
+    }
+
 
 
 }
